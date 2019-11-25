@@ -3,9 +3,6 @@ package com.lifeistech.android.musicalinstrument
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,19 +11,19 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.navigation_list -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, ListActivity())
+                    .replace(R.id.linearLayout, ListFlagment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_quiz -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, QuizActivity())
+                    .replace(R.id.linearLayout, QuizFlagment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, SearchActivity())
+                    .replace(R.id.linearLayout, SearchFlagment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -43,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         //初期表示
         supportFragmentManager.beginTransaction()
-            .replace(R.id.linearLayout, ListActivity())
+            .replace(R.id.linearLayout, ListFlagment())
             .commit()
     }
 }
