@@ -5,12 +5,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".QuizFlagment" android:orientation="vertical" android:id="@+id/linearLayout">
+        tools:context=".QuizFragment" android:orientation="vertical" android:id="@+id/linearLayout">
 
     <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp" app:srcCompat="@android:drawable/ic_media_play"
-            android:id="@+id/imageView2" android:layout_margin="40dp" android:layout_gravity="center"/>
+            android:id="@+id/playView" android:layout_margin="40dp" android:layout_gravity="center"/>
     <TextView
             android:text="この楽器は？"
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
         <Button
                 android:text="Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/button" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/button1" android:layout_weight="1"/>
         <Button
                 android:text="Button"
                 android:layout_width="wrap_content"
@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content" android:id="@+id/button4" android:layout_weight="1"/>
     </LinearLayout>
     <TextView
-            android:text="答え"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/answerView" android:textSize="30sp"
             android:textAlignment="center"/>

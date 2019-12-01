@@ -1,8 +1,6 @@
 package com.lifeistech.android.musicalinstrument
 
 import android.content.Context
-import android.media.AudioManager
-import android.media.SoundPool
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,10 +8,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.flagment_list.*
 import values.Inst
 
-class ListFlagment : Fragment() {
+class ListFragment : Fragment() {
     val instList = mutableListOf<Inst>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,9 +19,11 @@ class ListFlagment : Fragment() {
         val cxt : Context = view.context
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        for (i in 0..10) {
-            instList.add(Inst(R.drawable.music_piano, "piano", R.raw.VSQ_JINGLE_030_logo_piano))
-        }
+        instList.add(Inst(R.drawable.music_piano, "ピアノ", R.raw.piano))
+        instList.add(Inst(R.drawable.music_banjo, "バンジョー", R.raw.banjo))
+        instList.add(Inst(R.drawable.music_tenor_saxophone, "サックス", R.raw.tenor_sax))
+        instList.add(Inst(R.drawable.music_tynpani, "ティンパニー", R.raw.tynpani))
+        instList.add(Inst(R.drawable.music_viola, "ヴィオラ", R.raw.viola))
 
         recyclerView.adapter = InstListAdapter(cxt, instList)
         recyclerView.layoutManager = LinearLayoutManager(cxt)

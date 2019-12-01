@@ -6,24 +6,23 @@ import android.support.v7.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    //private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_list -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, ListFlagment())
+                    .replace(R.id.linearLayout, ListFragment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_quiz -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, QuizFlagment())
+                    .replace(R.id.linearLayout, QuizFragment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.linearLayout, SearchFlagment())
+                    .replace(R.id.linearLayout, SearchFragment())
                     .commit()
                 return@OnNavigationItemSelectedListener true
             }
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         //初期表示
         supportFragmentManager.beginTransaction()
-            .replace(R.id.linearLayout, ListFlagment())
+            .replace(R.id.linearLayout, ListFragment())
             .commit()
     }
 }

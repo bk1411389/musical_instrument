@@ -5,10 +5,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SearchFlagment" android:orientation="vertical" android:id="@+id/linearLayout">
+        tools:context=".SearchFragment" android:orientation="vertical" android:id="@+id/linearLayout">
 
     <TextView
-            android:text="ここはsearchActivity"
+            android:text="実装中"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/textView" android:gravity="center"/>
+            android:layout_height="match_parent" android:id="@+id/textView" android:gravity="center"
+            android:textSize="24sp"/>
 </LinearLayout>
