@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import values.Inst
 
 class ListFragment : Fragment() {
-    val instList = mutableListOf<Inst>()
+    private val instList = mutableListOf<Inst>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

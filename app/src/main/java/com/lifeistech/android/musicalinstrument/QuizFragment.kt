@@ -17,11 +17,11 @@ import kotlin.collections.ArrayList
 
 
 class QuizFragment : Fragment() {
-    private val question_list: ArrayList<Question> = arrayListOf()
-    private var question_num: Int = 0
+    private val questionList: ArrayList<Question> = arrayListOf()
+    private var questionNum: Int = 0
     private var current = 0
     // 現在の問題
-    private var current_question: Question = Question("","","","", 0)
+    private var currentQuestion: Question = Question("","","","", 0)
 
     private var imageView: ImageView? = null
     private var button1: Button? = null
@@ -30,7 +30,7 @@ class QuizFragment : Fragment() {
     private var button4: Button? = null
     private var nextButton: Button? = null
 
-    var mediaPlayer: MediaPlayer = MediaPlayer()
+    private var mediaPlayer: MediaPlayer = MediaPlayer()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.flagment_quiz, container, false)
@@ -70,21 +70,22 @@ class QuizFragment : Fragment() {
         val q3 = Question("テナーサックス", "バリトンサックス", "アルトサックス", "ソプラノサックス", R.raw.tenor_sax)
         val q4 = Question("ヴィオラ","バイオリン","チェロ","コントラバス",R.raw.viola)
         val q5 = Question("ティンパニー","バスドラム","タブラ","タム",R.raw.tynpani)
-        question_list.add(q1)
-        question_list.add(q2)
-        question_list.add(q3)
-        question_list.add(q4)
-        question_list.add(q5)
+        questionList.add(q1)
+        questionList.add(q2)
+        questionList.add(q3)
+        questionList.add(q4)
+        questionList.add(q5)
     }
 
     private fun startQuestion() {
-        question_num = question_list.size
+        questionNum = questionList.size
         nextQuestion()
     }
 
     private fun nextQuestion() {
         answerView.text = ""
-        if (current >= question_num) {
+        mediaPlayer.stop()
+        if (current >= questionNum) {
             // 次の問題がもう無い時
             toastMake("クイズはこれで全部だよ！", 0, 600)
             makeQuestion()
@@ -92,18 +93,29 @@ class QuizFragment : Fragment() {
             return
         }
 
-        current_question = question_list[current]
+        currentQuestion = questionList[current]
 
-        val choice_text = current_question.getChoices()
+        val choiceText = currentQuestion.getChoices()
         playView?.setOnClickListener {
-            mediaPlayer = MediaPlayer.create(context, current_question.getMusic())
+            mediaPlayer.stop()
+            mediaPlayer.release()
+            mediaPlayer = MediaPlayer.create(context, currentQuestion.mMusic)
             mediaPlayer.start()
+
+            when(mediaPlayer.isPlaying){
+                true -> playView.setImageResource(android.R.drawable.ic_media_play)
+                false ->playView.setImageResource(android.R.drawable.ic_media_pause)
+            }
         }
-        mediaPlayer.stop()
-        button1?.text = choice_text[0]
-        button2?.text = choice_text[1]
-        button3?.text = choice_text[2]
-        button4?.text = choice_text[3]
+
+        mediaPlayer.setOnCompletionListener {
+            playView.setImageResource(android.R.drawable.ic_media_play)
+        }
+
+        button1?.text = choiceText[0]
+        button2?.text = choiceText[1]
+        button3?.text = choiceText[2]
+        button4?.text = choiceText[3]
 
         current += 1
     }
@@ -115,37 +127,27 @@ class QuizFragment : Fragment() {
         toast.show()
     }
 
-    // ボタンがタップされた時に呼ばれるイベントリスナー
+    // TODO 解答ボタン制御
     private fun click(answer: String) :String{
-        //右辺にボタン内のテキスト入れたい
-        val text: String
-        if (answer == current_question._answer) {
-            //正解時の処理 toast表示
-            text = "正解！！"
-        }else{
-            text = "不正解！"
+        val text: String = when(answer){
+            currentQuestion.mAnswer -> "正解！！"
+            else -> "不正解！"
         }
         return text
     }
 
     class Question(answer: String, wrong_1: String, wrong_2: String, wrong_3: String, music: Int){
-        var _answer: String = answer
-        var _wrong_1: String = wrong_1
-        var _wrong_2: String = wrong_2
-        var _wrong_3: String = wrong_3
-        var _music: Int = music
+        var mAnswer: String = answer
+        var mWrong_1: String = wrong_1
+        var mWrong_2: String = wrong_2
+        var mWrong_3: String = wrong_3
+        var mMusic: Int = music
 
         // シャッフルした問題の選択肢を返すメソッド
         fun getChoices(): List<String> {
-            // ボタンの位置をランダムにする
-            val list = listOf(_answer, _wrong_1, _wrong_2, _wrong_3)
+            val list = listOf(mAnswer, mWrong_1, mWrong_2, mWrong_3)
             val shuffuled : List<String> = list.shuffled()
-
             return shuffuled
-        }
-
-        fun getMusic(): Int{
-            return _music
         }
     }
 }

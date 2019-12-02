@@ -1,9 +1,7 @@
 package com.lifeistech.android.musicalinstrument
 
 import android.content.Context
-import android.media.AudioManager
 import android.media.MediaPlayer
-import android.media.SoundPool
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +13,7 @@ import values.Inst
 class InstListAdapter(private val context: Context, private val instList: List<Inst>) :
     RecyclerView.Adapter<InstListAdapter.InstListViewHolder>() {
 
-    private val mediaPlayer:MediaPlayer = MediaPlayer.create(context, R.raw.piano)
+    private var mediaPlayer :MediaPlayer = MediaPlayer()
 
     class InstListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.imageView)
@@ -28,11 +26,24 @@ class InstListAdapter(private val context: Context, private val instList: List<I
 
     override fun getItemCount(): Int = instList.size
 
-    override fun onBindViewHolder(holder: InstListViewHolder, position: Int) {
+    override fun onBindViewHolder (holder: InstListViewHolder, position: Int) {
         holder.imageView.setImageResource(instList[position].imageId)
         holder.explainView.text = instList[position].name
         holder.playView.setOnClickListener {
+            mediaPlayer.stop()
+            mediaPlayer.release()
+            mediaPlayer = MediaPlayer.create(context, instList[position].musicId)
             mediaPlayer.start()
+
+            when(mediaPlayer.isPlaying){
+                true -> holder.playView.setImageResource(android.R.drawable.ic_media_play)
+                false -> holder.playView.setImageResource(android.R.drawable.ic_media_pause)
+            }
         }
+
+        mediaPlayer.setOnCompletionListener {
+            holder.playView.setImageResource(android.R.drawable.ic_media_play)
+        }
+
     }
 }
