@@ -35,10 +35,10 @@ class InstListAdapter(private val context: Context, private val instList: List<I
             mediaPlayer = MediaPlayer.create(context, instList[position].musicId)
             mediaPlayer.start()
 
-            when(mediaPlayer.isPlaying){
-                true -> holder.playView.setImageResource(android.R.drawable.ic_media_play)
-                false -> holder.playView.setImageResource(android.R.drawable.ic_media_pause)
-            }
+//            when(mediaPlayer.isPlaying){
+//                true -> holder.playView.setImageResource(android.R.drawable.ic_media_play)
+//                false -> holder.playView.setImageResource(android.R.drawable.ic_media_pause)
+//            }
         }
 
         mediaPlayer.setOnCompletionListener {

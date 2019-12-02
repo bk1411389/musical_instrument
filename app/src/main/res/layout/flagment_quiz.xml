@@ -5,12 +5,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".QuizFragment" android:orientation="vertical" android:id="@+id/linearLayout">
+        tools:context=".QuizFragment" android:orientation="vertical" android:id="@+id/linearLayout"
+        android:gravity="center">
 
     <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp" app:srcCompat="@android:drawable/ic_media_play"
-            android:id="@+id/playView" android:layout_margin="40dp" android:layout_gravity="center"/>
+            android:id="@+id/playView" android:layout_gravity="center"/>
     <TextView
             android:text="この楽器は？"
             android:layout_width="match_parent"
@@ -23,11 +24,11 @@
             android:layout_marginRight="40dp">
         <Button
                 android:text="Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/button1" android:layout_weight="1"/>
         <Button
                 android:text="Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/button2" android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
@@ -37,11 +38,11 @@
             android:layout_marginStart="40dp" android:layout_marginEnd="40dp" android:layout_marginBottom="20dp">
         <Button
                 android:text="Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/button3" android:layout_weight="1"/>
         <Button
                 android:text="Button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/button4" android:layout_weight="1"/>
     </LinearLayout>
     <TextView
